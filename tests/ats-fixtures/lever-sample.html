@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lever ATS Test Fixture - Principal Web Platform Engineer</title>
+</head>
+<body>
+  <div class="application-page">
+    <div class="posting-header">
+      <h2>Principal Web Platform Engineer</h2>
+      <div class="org-name">Coinbase</div>
+    </div>
+
+    <form class="application-form" id="application-form" action="/submit" method="POST">
+      <div class="application-label">Resume/CV <span>✱</span></div>
+      <input type="file" name="resume" required>
+
+      <div class="application-label">Full name <span>✱</span></div>
+      <input type="text" name="name" required>
+
+      <div class="application-label">Email <span>✱</span></div>
+      <input type="email" name="email" required>
+
+      <div class="application-label">Phone <span>✱</span></div>
+      <input type="tel" name="phone" required>
+
+      <div class="application-label">Current company</div>
+      <input type="text" name="org">
+
+      <div class="application-label">LinkedIn URL</div>
+      <input type="text" name="urls[LinkedIn]">
+
+      <div class="application-label">GitHub URL</div>
+      <input type="text" name="urls[GitHub]">
+
+      <div class="application-label">Additional Information</div>
+      <textarea name="comments" placeholder="Add a cover letter or anything else you would like to share."></textarea>
+
+      <button type="submit" id="btn-submit" class="template-btn-submit">Submit application</button>
+    </form>
+
+    <div class="application-confirmation" style="display: none;">
+      <h2>Application submitted!</h2>
+      <p>Thanks for applying to Coinbase. We've received your application.</p>
+    </div>
+  </div>
+</body>
+</html>

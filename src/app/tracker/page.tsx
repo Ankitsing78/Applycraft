@@ -142,7 +142,12 @@ export default function TrackerPage() {
       {/* Kanban Columns */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 items-start">
         {COLUMNS.map((col) => {
-          const colItems = filtered.filter((a) => a.status === col.id);
+          const colItems = filtered.filter((a) => {
+            if (col.id === "applied") {
+              return a.status === "applied" || a.status === "demo_submitted";
+            }
+            return a.status === col.id;
+          });
           return (
             <TiltCard
               key={col.id}
@@ -174,9 +179,16 @@ export default function TrackerPage() {
                           <span>{app.company}</span>
                         </div>
                       </div>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-300 font-mono font-bold border border-cyan-500/30">
-                        {app.matchScore}%
-                      </span>
+                      <div className="flex flex-col items-end gap-1">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-300 font-mono font-bold border border-cyan-500/30">
+                          {app.matchScore}%
+                        </span>
+                        {app.confirmation?.isSimulated && (
+                          <span className="text-[8px] px-1 py-0.2 rounded bg-amber-500/20 text-amber-300 font-mono border border-amber-500/30">
+                            DEMO
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-cyan-500/15 font-mono">

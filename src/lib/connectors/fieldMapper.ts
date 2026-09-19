@@ -198,7 +198,7 @@ export function generateApplicationFormFields(
       name: "current_salary",
       label: `Current Salary / Compensation (${profile.questionnaire.currency})`,
       type: "text",
-      value: profile.questionnaire.currentSalary,
+      value: profile.questionnaire.currentSalary || "",
       required: false,
       category: "screening",
       confidence: 95,

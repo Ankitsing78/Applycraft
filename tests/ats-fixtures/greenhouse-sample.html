@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Greenhouse ATS Test Fixture - Senior Full Stack Engineer</title>
+</head>
+<body>
+  <div id="app_body">
+    <h1>Senior Full Stack Engineer at Acme Cloud</h1>
+    <div id="job_description">
+      <p>We are looking for a Senior Full Stack Engineer with expertise in TypeScript, React, and Node.js.</p>
+    </div>
+
+    <form id="application_form" action="/apply" method="POST">
+      <div class="field">
+        <label for="first_name">First Name <span class="asterisk">*</span></label>
+        <input type="text" id="first_name" name="first_name" required>
+      </div>
+
+      <div class="field">
+        <label for="last_name">Last Name <span class="asterisk">*</span></label>
+        <input type="text" id="last_name" name="last_name" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Email <span class="asterisk">*</span></label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone <span class="asterisk">*</span></label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+
+      <div class="field">
+        <label for="resume">Resume/CV <span class="asterisk">*</span></label>
+        <input type="file" id="resume" name="resume" required>
+      </div>
+
+      <div class="field">
+        <label for="cover_letter_text">Cover Letter</label>
+        <textarea id="cover_letter_text" name="cover_letter_text" rows="5"></textarea>
+      </div>
+
+      <div id="custom_fields">
+        <div class="field">
+          <label for="notice_period">What is your official notice period?</label>
+          <input type="text" id="notice_period" name="job_application[answers_attributes][0][text_value]">
+        </div>
+        <div class="field">
+          <label for="work_auth">Are you legally authorized to work in India?</label>
+          <select id="work_auth" name="job_application[answers_attributes][1][boolean_value]">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+      </div>
+
+      <input type="submit" id="submit_app" value="Submit Application">
+    </form>
+
+    <!-- Simulated post-submission confirmation section (hidden initially) -->
+    <div id="application_confirmation" style="display: none;">
+      <h2>Thank you for applying to Acme Cloud!</h2>
+      <p>Your application for Senior Full Stack Engineer has been successfully submitted. Reference: GH-8492019.</p>
+    </div>
+  </div>
+</body>
+</html>

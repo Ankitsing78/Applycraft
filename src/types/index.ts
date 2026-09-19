@@ -1,26 +1,49 @@
+export type PortalId =
+  | "linkedin"
+  | "naukri"
+  | "indeed"
+  | "hirist"
+  | "foundit"
+  | "shine"
+  | "greenhouse"
+  | "workday"
+  | "lever";
+
+export type CandidateSkills = Record<string, string[]> & {
+  languages?: string[];
+  frameworks?: string[];
+  cloudAndDevops?: string[];
+  databases?: string[];
+  tools?: string[];
+  domainKnowledge?: string[];
+};
+
 export interface ExperienceItem {
   id: string;
   company: string;
   role: string;
   location: string;
   startDate: string;
-  endDate: string;
-  current: boolean;
+  endDate: string | "Present";
+  isCurrent?: boolean;
+  current?: boolean;
+  technologies?: string[];
   bullets: string[];
-  technologies: string[];
 }
 
 export interface EducationItem {
   id: string;
   degree: string;
   institution: string;
-  fieldOfStudy: string;
-  startYear: string;
-  endYear: string;
+  fieldOfStudy?: string;
+  startYear?: string;
+  endYear?: string;
+  graduationYear?: string;
   gpa?: string;
+  location?: string;
 }
 
-export interface MasterResume {
+export interface ResumeItem {
   id: string;
   title: string;
   fileName: string;
@@ -32,52 +55,36 @@ export interface MasterResume {
 export interface CandidateProfile {
   id: string;
   fullName: string;
-  headline: string;
+  headline?: string;
+  summary?: string;
   email: string;
   phone: string;
   location: string;
-  portfolioUrl: string;
+  currentRole?: string;
+  totalExperienceYears?: number;
   linkedinUrl: string;
   githubUrl: string;
-  summary: string;
+  portfolioUrl?: string;
+  skills: CandidateSkills;
   experience: ExperienceItem[];
   education: EducationItem[];
-  skills: {
-    languages: string[];
-    frameworks: string[];
-    cloudAndDevops: string[];
-    databases: string[];
-    tools: string[];
-    domainKnowledge: string[];
-  };
   questionnaire: {
-    workAuthorization: string;
-    requireVisaSponsorship: "Yes" | "No";
-    noticePeriod: string; // e.g. "Immediate", "15 days", "30 days"
-    currentSalary: string;
+    noticePeriod: string;
     expectedSalary: string;
+    currentSalary: string;
     currency: string;
-    willingToRelocate: "Yes" | "No" | "Remote Only";
-    preferredWorkMode: "Remote" | "Hybrid" | "On-site" | "Any";
+    willingToRelocate?: string | boolean;
+    workAuthorization: string;
+    requireVisaSponsorship: string;
+    preferredWorkMode?: "Remote" | "Hybrid" | "On-site" | string;
     yearsOfExperience: number;
-    gender: string;
-    veteranStatus: string;
-    disabilityStatus: string;
+    gender?: string;
+    veteranStatus?: string;
+    disabilityStatus?: string;
     customAnswers: Record<string, string>;
   };
-  resumes: MasterResume[];
+  resumes: ResumeItem[];
 }
-
-export type PortalId =
-  | "linkedin"
-  | "naukri"
-  | "indeed"
-  | "hirist"
-  | "foundit"
-  | "shine"
-  | "greenhouse"
-  | "lever"
-  | "workday";
 
 export interface PortalCapabilities {
   jobDetection: boolean;
@@ -127,6 +134,23 @@ export interface JobDetails {
   tailoringRecommendations: string[];
 }
 
+export interface EvidencePointer {
+  id: string;
+  sourceType: "experience" | "education" | "skill" | "questionnaire";
+  sourceId: string;
+  originalText: string;
+  verified: boolean;
+}
+
+export interface GroundingAudit {
+  totalClaims: number;
+  groundedClaims: number;
+  ungroundedClaims: number;
+  groundingScore: number; // 0.0 to 1.0
+  zeroHallucinationVerified: boolean;
+  notes?: string[];
+}
+
 export interface TailoredResumeResult {
   id: string;
   jobId: string;
@@ -141,11 +165,15 @@ export interface TailoredResumeResult {
     originalBullets: string[];
     tailoredBullets: string[];
     rationale: string;
+    evidencePointers?: string[];
+    groundingScore?: number;
   }[];
   highlightedSkills: string[];
   customCoverLetter: string;
   screeningAnswers: Record<string, string>;
   atsScore: number;
+  overallGroundingScore?: number;
+  groundingAudit?: GroundingAudit;
   createdAt: string;
 }
 
@@ -165,6 +193,22 @@ export interface FormField {
   isUserEdited: boolean;
 }
 
+export type SubmissionEvidenceType =
+  | "dom_confirmation"
+  | "http_receipt"
+  | "user_manual_attestation"
+  | "synthetic_demo";
+
+export interface SubmissionConfirmation {
+  confirmationId: string;
+  timestamp: string;
+  portalResponse: string;
+  isSimulated: boolean;
+  evidenceType: SubmissionEvidenceType;
+  rawReceiptSnippet?: string;
+  screenshotHash?: string;
+}
+
 export interface ApplicationReviewData {
   id: string;
   jobId: string;
@@ -177,11 +221,7 @@ export interface ApplicationReviewData {
   tailoredResumeName: string;
   coverLetter: string;
   status: "ready_for_review" | "confirmed" | "submitting" | "submitted" | "failed";
-  submissionConfirmation?: {
-    confirmationId: string;
-    timestamp: string;
-    portalResponse: string;
-  };
+  submissionConfirmation?: SubmissionConfirmation;
   notes: string;
   createdAt: string;
   confirmedAt?: string;
@@ -193,10 +233,11 @@ export interface JobApplicationItem {
   company: string;
   portal: PortalId | "direct";
   jobUrl: string;
-  status: "review_ready" | "applied" | "screening" | "interview" | "offer" | "rejected";
+  status: "review_ready" | "ready_to_submit" | "demo_submitted" | "applied" | "screening" | "interview" | "offer" | "rejected";
   matchScore: number;
   appliedDate: string;
   tailoredResumeId?: string;
   reviewId?: string;
+  confirmation?: SubmissionConfirmation;
   notes?: string;
 }
