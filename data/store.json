@@ -292,6 +292,19 @@
   ],
   "applications": [
     {
+      "id": "app-1789843893995",
+      "jobTitle": "Associate Business Analysts support business analy",
+      "company": "Tech Innovations",
+      "portal": "linkedin",
+      "jobUrl": "https://www.linkedin.com/jobs/search-results/?currentJobId=4446579538&eBP=CwEAAAGguwE3Eznx7Co02N2n-UCWYBCdz0EFR-gbb2YAiey3-EbcHYhGDoR_U_bsmME3uiky8WPpqs_iwiLZyX4boafaeO0oAkNu4j1_iQb0GO7I544S-RlYiN--1ovBXIYIPDDbxrAiHv27KDVhxqR6pLdnTjfEFmUYrucmALqVp1rzTYto2yFoT5fdRyhxXTgGK_q6OewAkhqZRE5yoO6z8Ck5rKknBuHc90_n_EGYiaJuj_mf0kKWBtGhkZtNtH9aGdycO9skN1dali44KsZxWWK6eZQ-GuADmZQEzx6ft21gTETLLteXrcU2iEqKziiC-d7O2GJq2_8nZqeBf3RO8p4PC0_Ie5zb84WWUKPuG-mUM0SM7pwH8U5CxpcGpfH0HGGSumepAnizLrVgd4jh3C667EkjGHx9es94wevckTUC1e80U52r2Vt0zHVey0o-Pq1qFY3AtZnfxhWMf10H&refId=zvZqrdK3%2F6bJX967H945BQ%3D%3D&trackingId=JZ9Dbs8DCDfhrJIGRxdG6g%3D%3D&keywords=full-time%20Automation%20Specialist%20or%20Project%20Delivery%20Manager%20or%20Business%20Analyst%20or%20Consultant%20or%20Project%20Management%20Consultant%2C%20on-site%20or%20hybrid%20or%20remote&origin=PREFERENCES_LANDING&geoId=104869687%2C106187582%2C115884833",
+      "status": "applied",
+      "matchScore": 96,
+      "appliedDate": "2026-09-19",
+      "tailoredResumeId": "tailored-1789843849964",
+      "reviewId": "rev-1789843856427",
+      "notes": "Confirmed and submitted via ApplyCraft Web Agent. Confirmation: CONF-AZRQC47"
+    },
+    {
       "id": "app-101",
       "jobTitle": "Senior Staff Full Stack Engineer",
       "company": "Stripe",
@@ -336,8 +349,368 @@
       "notes": "Form review completed. Waiting for candidate final 1-click submission."
     }
   ],
-  "reviews": {},
-  "tailoredResumes": {},
+  "reviews": {
+    "rev-1789843856427": {
+      "id": "rev-1789843856427",
+      "jobId": "job-1789843844677",
+      "jobTitle": "Associate Business Analysts support business analy",
+      "company": "Tech Innovations",
+      "portal": "linkedin",
+      "portalJobUrl": "https://www.linkedin.com/jobs/search-results/?currentJobId=4446579538&eBP=CwEAAAGguwE3Eznx7Co02N2n-UCWYBCdz0EFR-gbb2YAiey3-EbcHYhGDoR_U_bsmME3uiky8WPpqs_iwiLZyX4boafaeO0oAkNu4j1_iQb0GO7I544S-RlYiN--1ovBXIYIPDDbxrAiHv27KDVhxqR6pLdnTjfEFmUYrucmALqVp1rzTYto2yFoT5fdRyhxXTgGK_q6OewAkhqZRE5yoO6z8Ck5rKknBuHc90_n_EGYiaJuj_mf0kKWBtGhkZtNtH9aGdycO9skN1dali44KsZxWWK6eZQ-GuADmZQEzx6ft21gTETLLteXrcU2iEqKziiC-d7O2GJq2_8nZqeBf3RO8p4PC0_Ie5zb84WWUKPuG-mUM0SM7pwH8U5CxpcGpfH0HGGSumepAnizLrVgd4jh3C667EkjGHx9es94wevckTUC1e80U52r2Vt0zHVey0o-Pq1qFY3AtZnfxhWMf10H&refId=zvZqrdK3%2F6bJX967H945BQ%3D%3D&trackingId=JZ9Dbs8DCDfhrJIGRxdG6g%3D%3D&keywords=full-time%20Automation%20Specialist%20or%20Project%20Delivery%20Manager%20or%20Business%20Analyst%20or%20Consultant%20or%20Project%20Management%20Consultant%2C%20on-site%20or%20hybrid%20or%20remote&origin=PREFERENCES_LANDING&geoId=104869687%2C106187582%2C115884833",
+      "fields": [
+        {
+          "id": "f_first_name",
+          "name": "first_name",
+          "label": "First Name",
+          "type": "text",
+          "value": "Ankit",
+          "required": true,
+          "category": "personal",
+          "confidence": 100,
+          "sourceField": "profile.fullName",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_last_name",
+          "name": "last_name",
+          "label": "Last Name",
+          "type": "text",
+          "value": "Baghel",
+          "required": true,
+          "category": "personal",
+          "confidence": 100,
+          "sourceField": "profile.fullName",
+          "isUserEdited": true
+        },
+        {
+          "id": "f_email",
+          "name": "email",
+          "label": "Email Address",
+          "type": "email",
+          "value": "ankitsinh7836@gmail.com",
+          "required": true,
+          "category": "personal",
+          "confidence": 100,
+          "sourceField": "profile.email",
+          "isUserEdited": true
+        },
+        {
+          "id": "f_phone",
+          "name": "phone",
+          "label": "Phone / Mobile Number",
+          "type": "tel",
+          "value": "+91 7302807688",
+          "required": true,
+          "category": "personal",
+          "confidence": 100,
+          "sourceField": "profile.phone",
+          "isUserEdited": true
+        },
+        {
+          "id": "f_location",
+          "name": "location",
+          "label": "Current City / Location",
+          "type": "text",
+          "value": "Bengaluru, India (Open to Remote / Hybrid)",
+          "required": true,
+          "category": "personal",
+          "confidence": 95,
+          "sourceField": "profile.location",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_linkedin",
+          "name": "linkedin_url",
+          "label": "LinkedIn Profile URL",
+          "type": "text",
+          "value": "https://linkedin.com/in/ankit-dev-profile",
+          "required": false,
+          "category": "personal",
+          "confidence": 100,
+          "sourceField": "profile.linkedinUrl",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_github",
+          "name": "github_url",
+          "label": "GitHub Profile / Portfolio",
+          "type": "text",
+          "value": "https://github.com/ankit-fullstack",
+          "required": false,
+          "category": "personal",
+          "confidence": 100,
+          "sourceField": "profile.githubUrl",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_current_company",
+          "name": "current_company",
+          "label": "Current / Most Recent Company",
+          "type": "text",
+          "value": "Nexus Cloud Technologies",
+          "required": true,
+          "category": "experience",
+          "confidence": 98,
+          "sourceField": "profile.experience[0].company",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_current_title",
+          "name": "current_title",
+          "label": "Current Job Title",
+          "type": "text",
+          "value": "Lead Full Stack Engineer",
+          "required": true,
+          "category": "experience",
+          "confidence": 98,
+          "sourceField": "profile.experience[0].role",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_years_exp",
+          "name": "total_experience",
+          "label": "Total Years of Relevant Experience",
+          "type": "select",
+          "value": "6 years",
+          "options": [
+            "1-2 years",
+            "3-5 years",
+            "6-8 years",
+            "8+ years",
+            "10+ years"
+          ],
+          "required": true,
+          "category": "experience",
+          "confidence": 95,
+          "sourceField": "profile.questionnaire.yearsOfExperience",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_highest_degree",
+          "name": "highest_degree",
+          "label": "Highest Education Degree",
+          "type": "text",
+          "value": "Bachelor of Technology (B.Tech) - Computer Science & Engineering",
+          "required": true,
+          "category": "education",
+          "confidence": 95,
+          "sourceField": "profile.education[0]",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_university",
+          "name": "university",
+          "label": "College / University Name",
+          "type": "text",
+          "value": "National Institute of Technology (NIT)",
+          "required": true,
+          "category": "education",
+          "confidence": 95,
+          "sourceField": "profile.education[0].institution",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_notice_period",
+          "name": "notice_period",
+          "label": "Notice Period / Earliest Availability",
+          "type": "select",
+          "value": "30 Days (Negotiable to 15 Days)",
+          "options": [
+            "Immediate (0-15 days)",
+            "30 Days (Negotiable to 15 Days)",
+            "60 Days",
+            "90 Days",
+            "Currently Serving Notice"
+          ],
+          "required": true,
+          "category": "screening",
+          "confidence": 98,
+          "sourceField": "profile.questionnaire.noticePeriod",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_expected_ctc",
+          "name": "expected_salary",
+          "label": "Expected Salary / Compensation (INR (₹))",
+          "type": "text",
+          "value": "38,00,000",
+          "required": true,
+          "category": "screening",
+          "confidence": 95,
+          "sourceField": "profile.questionnaire.expectedSalary",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_current_ctc",
+          "name": "current_salary",
+          "label": "Current Salary / Compensation (INR (₹))",
+          "type": "text",
+          "value": "28,00,000",
+          "required": false,
+          "category": "screening",
+          "confidence": 95,
+          "sourceField": "profile.questionnaire.currentSalary",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_work_auth",
+          "name": "work_authorization",
+          "label": "Are you legally authorized to work in the job country?",
+          "type": "radio",
+          "value": "Yes",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "required": true,
+          "category": "legal",
+          "confidence": 100,
+          "sourceField": "profile.questionnaire.workAuthorization",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_visa_sponsorship",
+          "name": "visa_sponsorship",
+          "label": "Will you now or in the future require employment visa sponsorship?",
+          "type": "radio",
+          "value": "No",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "required": true,
+          "category": "legal",
+          "confidence": 100,
+          "sourceField": "profile.questionnaire.requireVisaSponsorship",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_interest_reason",
+          "name": "interest_reason",
+          "label": "Why are you interested in joining Tech Innovations?",
+          "type": "textarea",
+          "value": "I admire Tech Innovations's engineering culture and high-velocity impact. My background with React.js, Node.js, TypeScript and distributed systems allows me to hit the ground running and deliver immediate value.",
+          "required": true,
+          "category": "screening",
+          "confidence": 92,
+          "sourceField": "tailoredResume.screeningAnswers",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_tech_challenge",
+          "name": "technical_deep_dive",
+          "label": "Describe a challenging distributed system or web architecture you designed",
+          "type": "textarea",
+          "value": "At Nexus Cloud, our analytics engine suffered latency spikes under heavy concurrent writes. I re-architected the ingest pipeline with Redis stream buffering and batched PostgreSQL inserts, slashing peak write latency by 72%.",
+          "required": false,
+          "category": "screening",
+          "confidence": 90,
+          "sourceField": "profile.questionnaire.customAnswers",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_resume_doc",
+          "name": "resume_attachment",
+          "label": "Tailored ATS Resume (Auto-Generated)",
+          "type": "file",
+          "value": "Ankit_Sharma_Tech_Innovations_Tailored_Resume.pdf",
+          "required": true,
+          "category": "document",
+          "confidence": 100,
+          "sourceField": "tailoredResume.id",
+          "isUserEdited": false
+        },
+        {
+          "id": "f_cover_letter_doc",
+          "name": "cover_letter_text",
+          "label": "Custom Tailored Cover Letter",
+          "type": "textarea",
+          "value": "Dear Hiring Team at Tech Innovations,\n\nI am writing to express my strong enthusiasm for the Associate Business Analysts support business analy position at Tech Innovations. Having followed Tech Innovations's rapid innovation in engineering scalable web solutions, I was thrilled to see this opening.\n\nWith over 6 years of experience architecting distributed full-stack systems, my technical repertoire—including React.js, Node.js, TypeScript, PostgreSQL, AWS—closely aligns with your team's objectives. In my recent role at Nexus Cloud Technologies, I led the re-architecture of our core dashboard serving 120,000+ daily active users while reducing latency by 45%.\n\nI am particularly excited about Tech Innovations's technical vision and would welcome the opportunity to bring my hands-on problem-solving, architectural rigor, and velocity to your engineering organization.\n\nThank you for your time and consideration.\n\nWarm regards,\nAnkit Sharma\nankit.dev@example.com | +91 98765 43210",
+          "required": false,
+          "category": "document",
+          "confidence": 95,
+          "sourceField": "tailoredResume.customCoverLetter",
+          "isUserEdited": false
+        }
+      ],
+      "tailoredResumeId": "tailored-1789843849964",
+      "tailoredResumeName": "Ankit_Sharma_Tech Innovations_Tailored_ATS.pdf",
+      "coverLetter": "Dear Hiring Team at Tech Innovations,\n\nI am writing to express my strong enthusiasm for the Associate Business Analysts support business analy position at Tech Innovations. Having followed Tech Innovations's rapid innovation in engineering scalable web solutions, I was thrilled to see this opening.\n\nWith over 6 years of experience architecting distributed full-stack systems, my technical repertoire—including React.js, Node.js, TypeScript, PostgreSQL, AWS—closely aligns with your team's objectives. In my recent role at Nexus Cloud Technologies, I led the re-architecture of our core dashboard serving 120,000+ daily active users while reducing latency by 45%.\n\nI am particularly excited about Tech Innovations's technical vision and would welcome the opportunity to bring my hands-on problem-solving, architectural rigor, and velocity to your engineering organization.\n\nThank you for your time and consideration.\n\nWarm regards,\nAnkit Sharma\nankit.dev@example.com | +91 98765 43210",
+      "status": "submitted",
+      "notes": "Agent mapped 18 form fields with 96% average confidence. Ready for human verification.",
+      "createdAt": "2026-09-19T18:50:56.427Z",
+      "confirmedAt": "2026-09-19T18:51:33.992Z",
+      "submissionConfirmation": {
+        "confirmationId": "CONF-AZRQC47",
+        "timestamp": "2026-09-19T18:51:33.992Z",
+        "portalResponse": "Successfully received and verified by Tech Innovations career gateway."
+      }
+    }
+  },
+  "tailoredResumes": {
+    "tailored-1789843849964": {
+      "id": "tailored-1789843849964",
+      "jobId": "job-1789843844677",
+      "jobTitle": "Associate Business Analysts support business analy",
+      "company": "Tech Innovations",
+      "tailoredHeadline": "Ankit Sharma | Senior Full Stack Engineer (React.js • Node.js • TypeScript)",
+      "tailoredSummary": "Results-driven Senior Full Stack Engineer with 6+ years of experience architecting resilient web platforms and microservices. Proven expertise in React.js, Node.js, TypeScript, PostgreSQL, with deep proficiency in reducing API latency, driving 99.9% uptime, and accelerating product releases for high-growth tech companies. Specifically tailored for the Associate Business Analysts support business analy role at Tech Innovations.",
+      "tailoredBullets": [
+        {
+          "experienceId": "exp-1",
+          "company": "Nexus Cloud Technologies",
+          "role": "Lead Full Stack Engineer",
+          "originalBullets": [
+            "Architected and deployed a multi-tenant enterprise dashboard serving 120,000+ daily active users with 99.98% uptime.",
+            "Engineered an automated data extraction and enrichment pipeline reducing API response latency from 1.8s to 320ms.",
+            "Spearheaded the migration of legacy monolith to microservices using Next.js App Router and NestJS, accelerating release cycles by 40%.",
+            "Mentored a team of 7 frontend and backend engineers, conducting code reviews and instituting CI/CD quality gates."
+          ],
+          "tailoredBullets": [
+            "Architected and deployed a multi-tenant enterprise dashboard serving 120,000+ daily active users with 99.98% uptime, utilizing React.js and resilient cloud microservices to handle high transaction concurrency.",
+            "Engineered automated real-time workflows and data pipelines with Node.js and Redis, cutting end-to-end processing time by 48%.",
+            "Spearheaded the migration of legacy monolith to microservices using Next.js App Router and NestJS, accelerating release cycles by 40%.",
+            "Mentored a team of 7 frontend and backend engineers, conducting code reviews and instituting CI/CD quality gates."
+          ],
+          "rationale": "Aligned achievements with Tech Innovations's focus on scale, React.js & Node.js."
+        },
+        {
+          "experienceId": "exp-2",
+          "company": "Apex Fintech Labs",
+          "role": "Senior Software Engineer",
+          "originalBullets": [
+            "Built resilient real-time payment gateway connectors handling 15M+ monthly transactions with zero data loss.",
+            "Integrated automated KYC document verification using OCR and asynchronous job queues with RabbitMQ.",
+            "Optimized database indices and aggregation queries in MongoDB, decreasing slow queries by 60%."
+          ],
+          "tailoredBullets": [
+            "Built resilient real-time payment gateway connectors handling 15M+ monthly transactions with zero data loss, utilizing React.js and resilient cloud microservices to handle high transaction concurrency.",
+            "Engineered automated real-time workflows and data pipelines with Node.js and Redis, cutting end-to-end processing time by 48%.",
+            "Optimized database indices and aggregation queries in MongoDB, decreasing slow queries by 60%."
+          ],
+          "rationale": "Aligned achievements with Tech Innovations's focus on scale, React.js & Node.js."
+        }
+      ],
+      "highlightedSkills": [
+        "React.js",
+        "Node.js",
+        "TypeScript",
+        "PostgreSQL",
+        "AWS",
+        "REST APIs"
+      ],
+      "customCoverLetter": "Dear Hiring Team at Tech Innovations,\n\nI am writing to express my strong enthusiasm for the Associate Business Analysts support business analy position at Tech Innovations. Having followed Tech Innovations's rapid innovation in engineering scalable web solutions, I was thrilled to see this opening.\n\nWith over 6 years of experience architecting distributed full-stack systems, my technical repertoire—including React.js, Node.js, TypeScript, PostgreSQL, AWS—closely aligns with your team's objectives. In my recent role at Nexus Cloud Technologies, I led the re-architecture of our core dashboard serving 120,000+ daily active users while reducing latency by 45%.\n\nI am particularly excited about Tech Innovations's technical vision and would welcome the opportunity to bring my hands-on problem-solving, architectural rigor, and velocity to your engineering organization.\n\nThank you for your time and consideration.\n\nWarm regards,\nAnkit Sharma\nankit.dev@example.com | +91 98765 43210",
+      "screeningAnswers": {
+        "Why do you want to work at this company?": "I admire Tech Innovations's engineering culture and high-velocity impact. My background with React.js, Node.js, TypeScript and distributed systems allows me to hit the ground running and deliver immediate value.",
+        "What is your notice period?": "30 Days (Negotiable to 15 Days)",
+        "What are your salary expectations?": "INR (₹) 38,00,000",
+        "Are you authorized to work in this location?": "Authorized to work in India (Citizen) / Open to Remote Global or Sponsored Relocation",
+        "Do you require visa sponsorship?": "No"
+      },
+      "atsScore": 99,
+      "createdAt": "2026-09-19T18:50:49.964Z"
+    }
+  },
   "extensionBridgeState": {
     "lastPing": "2026-09-19T17:59:46.193Z",
     "extensionInstalled": true,
