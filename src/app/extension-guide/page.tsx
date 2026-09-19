@@ -1,20 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import {
   Puzzle,
   CheckCircle2,
-  ExternalLink,
   ShieldCheck,
-  FolderOpen,
-  ArrowRight,
-  Terminal,
   RefreshCw,
-  Zap,
   Copy,
-  Check
+  Check,
+  Radio,
+  Cpu
 } from "lucide-react";
+import { TiltCard } from "@/components/TiltCard";
 
 export default function ExtensionGuidePage() {
   const [bridgeState, setBridgeState] = useState<any>(null);
@@ -51,137 +48,120 @@ export default function ExtensionGuidePage() {
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="pb-4 border-b border-slate-800">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-2">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          <span>Zero Credential Harvesting Architecture</span>
+      <div className="pb-4 border-b border-cyan-500/20">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-semibold mb-2">
+          <Radio className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+          <span>COMPANION TELEMETRY PROTOCOL</span>
         </div>
-        <h1 className="text-2xl font-bold text-white tracking-tight">
-          Companion Browser Bridge Setup
+        <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-mono">
+          BROWSER BRIDGE PROTOCOL SETUP
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 mt-1">
-          ApplyCraft uses a lightweight browser bridge to apply for jobs on LinkedIn, Naukri, Indeed, and
-          company portals using your existing browser sessions—without ever capturing or storing your passwords.
+          ApplyCraft pairs with your native browser sessions on LinkedIn, Naukri, and ATS portals without password exposure.
         </p>
       </div>
 
-      {/* Live Bridge Diagnostic Card */}
-      <div className="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-        <div className="flex items-center justify-between">
+      {/* Diagnostics */}
+      <TiltCard glowColor="cyan" className="p-6 space-y-4">
+        <div className="flex items-center justify-between font-mono">
           <h2 className="text-sm font-bold text-white flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            Bridge Status & Diagnostics
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
+            BRIDGE TELEMETRY & DIAGNOSTICS
           </h2>
           <button
             onClick={checkBridge}
             disabled={testing}
-            className="text-xs text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1"
+            className="text-xs text-cyan-400 hover:text-cyan-300 font-medium flex items-center gap-1"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${testing ? "animate-spin" : ""}`} />
-            <span>Test Connection</span>
+            <span>PING BRIDGE</span>
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-          <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
-            <span className="text-slate-400 block mb-1">Local Dashboard API:</span>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
+          <div className="p-3.5 rounded-xl bg-[#030712] border border-cyan-500/20">
+            <span className="text-slate-400 block mb-1">LOCAL DASHBOARD:</span>
             <span className="text-emerald-400 font-semibold flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Connected (Port 3000)
+              <CheckCircle2 className="w-3.5 h-3.5" /> ONLINE (3000)
             </span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
-            <span className="text-slate-400 block mb-1">Active Portal Session:</span>
-            <span className="text-indigo-300 font-semibold">
-              {bridgeState?.activeTabPortal || "LinkedIn & Naukri Active"}
+          <div className="p-3.5 rounded-xl bg-[#030712] border border-cyan-500/20">
+            <span className="text-slate-400 block mb-1">ACTIVE SESSION:</span>
+            <span className="text-cyan-300 font-semibold">
+              {bridgeState?.activeTabPortal || "LINKEDIN & NAUKRI"}
             </span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
-            <span className="text-slate-400 block mb-1">Human-in-the-Loop Mode:</span>
+          <div className="p-3.5 rounded-xl bg-[#030712] border border-cyan-500/20">
+            <span className="text-slate-400 block mb-1">HUMAN GATEWAY:</span>
             <span className="text-emerald-400 font-semibold flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5" /> Strict (Review Required)
+              <ShieldCheck className="w-3.5 h-3.5" /> ENFORCED
             </span>
           </div>
         </div>
-      </div>
+      </TiltCard>
 
       {/* Step-by-Step Installation */}
       <div className="space-y-6">
-        <h2 className="text-lg font-bold text-white">How to Load the Extension in 60 Seconds:</h2>
+        <h2 className="text-lg font-bold text-white font-mono">MOUNT COMPANION BRIDGE IN 60 SECONDS:</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="glass-card rounded-2xl p-5 border border-slate-800 space-y-2.5">
-            <div className="w-7 h-7 rounded-lg bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center text-xs font-bold text-indigo-400">
-              1
+          <TiltCard glowColor="cyan" className="p-5 space-y-2.5">
+            <div className="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-xs font-bold text-cyan-300 font-mono shadow-[0_0_10px_rgba(0,240,255,0.2)]">
+              01
             </div>
-            <h3 className="text-sm font-bold text-white">Open Browser Extensions</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              In Google Chrome, Edge, or Brave, open a new tab and navigate to:
+            <h3 className="text-sm font-bold text-white font-mono">Open Extensions Tab</h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-mono">
+              In Chrome, Edge, or Brave, open a tab and paste:
             </p>
-            <code className="block p-2 rounded bg-slate-950 border border-slate-800 text-[11px] text-indigo-300 font-mono select-all">
+            <code className="block p-2 rounded bg-[#02040a] border border-cyan-500/20 text-[11px] text-cyan-300 font-mono select-all">
               chrome://extensions
             </code>
-          </div>
+          </TiltCard>
 
-          <div className="glass-card rounded-2xl p-5 border border-slate-800 space-y-2.5">
-            <div className="w-7 h-7 rounded-lg bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center text-xs font-bold text-indigo-400">
-              2
+          <TiltCard glowColor="purple" className="p-5 space-y-2.5">
+            <div className="w-8 h-8 rounded-lg bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-xs font-bold text-purple-300 font-mono shadow-[0_0_10px_rgba(168,85,247,0.2)]">
+              02
             </div>
-            <h3 className="text-sm font-bold text-white">Enable Developer Mode</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Turn on the <strong className="text-slate-200">Developer mode</strong> toggle located at the top-right
-              corner of the extensions management page.
+            <h3 className="text-sm font-bold text-white font-mono">Enable Dev Mode</h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-mono">
+              Toggle on <strong className="text-slate-200">Developer mode</strong> in the top-right corner.
             </p>
-          </div>
+          </TiltCard>
 
-          <div className="glass-card rounded-2xl p-5 border border-slate-800 space-y-2.5">
-            <div className="w-7 h-7 rounded-lg bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center text-xs font-bold text-indigo-400">
-              3
+          <TiltCard glowColor="neon" className="p-5 space-y-2.5">
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xs font-bold text-emerald-300 font-mono shadow-[0_0_10px_rgba(0,255,136,0.2)]">
+              03
             </div>
-            <h3 className="text-sm font-bold text-white">Click &apos;Load unpacked&apos;</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Click the <strong className="text-slate-200">Load unpacked</strong> button and choose the extension
-              directory from this project.
+            <h3 className="text-sm font-bold text-white font-mono">Load Unpacked</h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-mono">
+              Click <strong className="text-slate-200">Load unpacked</strong> and select the extension folder.
             </p>
-          </div>
+          </TiltCard>
         </div>
 
         {/* Directory Copy Helper */}
-        <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-          <label className="block text-xs font-semibold text-slate-300">
-            Extension Absolute Folder Path (Click Copy):
+        <TiltCard glowColor="cyan" className="p-4 space-y-2">
+          <label className="block text-xs font-semibold text-slate-300 font-mono">
+            EXTENSION PATH (CLICK TO COPY):
           </label>
           <div className="flex items-center gap-2">
             <input
               type="text"
               readOnly
               value={extensionPath}
-              className="flex-1 bg-slate-950 border border-slate-700/80 rounded-lg px-3 py-2 text-xs font-mono text-indigo-300"
+              className="flex-1 bg-[#02040a] border border-cyan-500/30 rounded-lg px-3 py-2 text-xs font-mono text-cyan-300"
             />
             <button
               onClick={handleCopyPath}
-              className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
+              className="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-[0_0_12px_rgba(0,240,255,0.3)]"
             >
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copied ? "Copied!" : "Copy Path"}</span>
+              <span>{copied ? "COPIED" : "COPY"}</span>
             </button>
           </div>
-        </div>
-
-        {/* Why this is superior to password scraping */}
-        <div className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2 text-xs text-slate-300">
-          <h4 className="text-sm font-bold text-white flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            Why This Design Eliminates Account Bans & Security Risks
-          </h4>
-          <p className="leading-relaxed">
-            Major platforms (like LinkedIn and Naukri) actively ban IP ranges of cloud servers attempting to log
-            in with stored usernames and passwords. By keeping the automation inside your native browser, all
-            requests originate from your normal IP address with your genuine cookies and session tokens.
-            Most importantly, you retain 100% control via the Pre-Application Review screen before anything is submitted.
-          </p>
-        </div>
+        </TiltCard>
       </div>
     </div>
   );

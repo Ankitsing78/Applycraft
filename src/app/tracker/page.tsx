@@ -6,25 +6,22 @@ import {
   Kanban,
   Building,
   Calendar,
-  ExternalLink,
   Plus,
-  TrendingUp,
   FileCheck2,
   Trash2,
   Filter,
-  CheckCircle2,
-  Clock,
-  Sparkles
+  Radio
 } from "lucide-react";
 import { JobApplicationItem } from "@/types";
+import { TiltCard } from "@/components/TiltCard";
 
 const COLUMNS: { id: JobApplicationItem["status"]; title: string; color: string }[] = [
-  { id: "review_ready", title: "Review Ready", color: "border-amber-500/40 text-amber-400" },
-  { id: "applied", title: "Applied", color: "border-blue-500/40 text-blue-400" },
-  { id: "screening", title: "Recruiter Screen", color: "border-purple-500/40 text-purple-400" },
-  { id: "interview", title: "Technical Interview", color: "border-indigo-500/40 text-indigo-400" },
-  { id: "offer", title: "Offer Received", color: "border-emerald-500/40 text-emerald-400" },
-  { id: "rejected", title: "Archived", color: "border-slate-700 text-slate-400" },
+  { id: "review_ready", title: "REVIEW PENDING", color: "text-amber-400 border-amber-500/40" },
+  { id: "applied", title: "DISPATCHED", color: "text-cyan-400 border-cyan-500/40" },
+  { id: "screening", title: "SCREENING", color: "text-purple-400 border-purple-500/40" },
+  { id: "interview", title: "INTERVIEW", color: "text-indigo-400 border-indigo-500/40" },
+  { id: "offer", title: "OFFER RECEIVED", color: "text-emerald-400 border-emerald-500/40" },
+  { id: "rejected", title: "ARCHIVED", color: "text-slate-400 border-slate-700" },
 ];
 
 export default function TrackerPage() {
@@ -99,41 +96,45 @@ export default function TrackerPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-cyan-500/20">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2.5">
-            <Kanban className="w-6 h-6 text-indigo-400" />
-            Job Application Tracker
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-semibold mb-2">
+            <Radio className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+            <span>APPLICATION TELEMETRY GRID</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-mono flex items-center gap-2.5">
+            <Kanban className="w-6 h-6 text-cyan-400" />
+            PIPELINE KANBAN
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400">
-            Track applications submitted by web agents and manage interview stages in one unified pipeline.
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Track agent dispatches, interview rounds, and verified submission receipts in real time.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-300">
-            <Filter className="w-3.5 h-3.5 text-slate-400" />
-            <span>Portal:</span>
+          <div className="flex items-center gap-2 bg-[#030712] border border-cyan-500/30 rounded-xl px-3 py-1.5 text-xs text-slate-300 font-mono">
+            <Filter className="w-3.5 h-3.5 text-cyan-400" />
+            <span>PORTAL:</span>
             <select
               value={filterPortal}
               onChange={(e) => setFilterPortal(e.target.value)}
-              className="bg-transparent text-white focus:outline-none"
+              className="bg-transparent text-cyan-300 focus:outline-none font-mono"
             >
-              <option value="all" className="bg-slate-900">All Portals</option>
-              <option value="naukri" className="bg-slate-900">Naukri.com</option>
-              <option value="linkedin" className="bg-slate-900">LinkedIn</option>
-              <option value="greenhouse" className="bg-slate-900">Greenhouse</option>
-              <option value="lever" className="bg-slate-900">Lever</option>
-              <option value="hirist" className="bg-slate-900">Hirist</option>
+              <option value="all" className="bg-[#030712]">All Portals</option>
+              <option value="naukri" className="bg-[#030712]">Naukri.com</option>
+              <option value="linkedin" className="bg-[#030712]">LinkedIn</option>
+              <option value="greenhouse" className="bg-[#030712]">Greenhouse</option>
+              <option value="lever" className="bg-[#030712]">Lever</option>
+              <option value="hirist" className="bg-[#030712]">Hirist</option>
             </select>
           </div>
 
           <Link
             href="/apply"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-md shadow-indigo-600/30 transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 text-xs font-mono font-bold shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>New Application</span>
+            <span>NEW APPLICATION</span>
           </Link>
         </div>
       </div>
@@ -143,16 +144,17 @@ export default function TrackerPage() {
         {COLUMNS.map((col) => {
           const colItems = filtered.filter((a) => a.status === col.id);
           return (
-            <div
+            <TiltCard
               key={col.id}
-              className="glass-card rounded-2xl p-3.5 border border-slate-800 space-y-3 min-h-[300px]"
+              glowColor="cyan"
+              className="p-3.5 space-y-3 min-h-[320px]"
             >
               {/* Column Header */}
-              <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-                <span className={`text-xs font-bold uppercase tracking-wider ${col.color}`}>
+              <div className="flex items-center justify-between pb-2 border-b border-cyan-500/20 font-mono">
+                <span className={`text-[11px] font-bold uppercase tracking-wider ${col.color}`}>
                   {col.title}
                 </span>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-850 bg-slate-800 text-slate-300">
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">
                   {colItems.length}
                 </span>
               </div>
@@ -162,23 +164,23 @@ export default function TrackerPage() {
                 {colItems.map((app) => (
                   <div
                     key={app.id}
-                    className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all space-y-2.5 shadow-sm"
+                    className="p-3 rounded-xl bg-[#030712]/90 border border-cyan-500/20 hover:border-cyan-400/50 transition-all space-y-2.5 shadow-[0_0_10px_rgba(0,240,255,0.05)]"
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
                         <h2 className="text-xs font-bold text-white leading-snug">{app.jobTitle}</h2>
-                        <div className="flex items-center gap-1 text-[11px] text-slate-400 mt-0.5">
-                          <Building className="w-3 h-3 text-slate-500" />
+                        <div className="flex items-center gap-1 text-[11px] text-slate-400 mt-0.5 font-mono">
+                          <Building className="w-3 h-3 text-cyan-400" />
                           <span>{app.company}</span>
                         </div>
                       </div>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-300 font-semibold border border-indigo-500/20">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-300 font-mono font-bold border border-cyan-500/30">
                         {app.matchScore}%
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-slate-800/60">
-                      <span className="capitalize">{app.portal}</span>
+                    <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-cyan-500/15 font-mono">
+                      <span className="capitalize text-cyan-400">{app.portal}</span>
                       <span className="flex items-center gap-1">
                         <Calendar className="w-2.5 h-2.5 text-slate-500" />
                         {app.appliedDate}
@@ -186,7 +188,7 @@ export default function TrackerPage() {
                     </div>
 
                     {app.notes && (
-                      <p className="text-[10px] text-slate-400 line-clamp-2 bg-slate-950/60 p-1.5 rounded">
+                      <p className="text-[10px] text-slate-400 line-clamp-2 bg-[#02040a] p-1.5 rounded font-mono border border-cyan-500/10">
                         {app.notes}
                       </p>
                     )}
@@ -196,9 +198,9 @@ export default function TrackerPage() {
                       {app.status === "review_ready" ? (
                         <Link
                           href="/review"
-                          className="w-full py-1 text-center rounded bg-amber-500/20 text-amber-300 text-[10px] font-semibold hover:bg-amber-500/30 flex items-center justify-center gap-1"
+                          className="w-full py-1 text-center rounded bg-amber-500/20 text-amber-300 text-[10px] font-mono font-bold hover:bg-amber-500/30 flex items-center justify-center gap-1 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.2)]"
                         >
-                          <FileCheck2 className="w-3 h-3" /> Review Now
+                          <FileCheck2 className="w-3 h-3" /> REVIEW NOW
                         </Link>
                       ) : (
                         <select
@@ -206,11 +208,11 @@ export default function TrackerPage() {
                           onChange={(e) =>
                             handleStatusChange(app.id, e.target.value as any)
                           }
-                          className="text-[10px] bg-slate-950 border border-slate-800 rounded px-1.5 py-1 text-slate-300 focus:outline-none w-full"
+                          className="text-[10px] bg-[#02040a] border border-cyan-500/20 rounded px-1.5 py-1 text-cyan-300 font-mono focus:outline-none w-full"
                         >
                           {COLUMNS.map((c) => (
-                            <option key={c.id} value={c.id}>
-                              Move to: {c.title}
+                            <option key={c.id} value={c.id} className="bg-[#030712]">
+                              Move: {c.title}
                             </option>
                           ))}
                         </select>
@@ -218,7 +220,7 @@ export default function TrackerPage() {
 
                       <button
                         onClick={() => handleDelete(app.id)}
-                        className="text-slate-400 hover:text-rose-400 p-1 transition-colors ml-1"
+                        className="text-slate-500 hover:text-rose-400 p-1 transition-colors ml-1"
                         title="Delete application"
                       >
                         <Trash2 className="w-3 h-3" />
@@ -228,12 +230,12 @@ export default function TrackerPage() {
                 ))}
 
                 {colItems.length === 0 && (
-                  <div className="text-center py-8 text-[11px] text-slate-400 italic">
-                    No applications
+                  <div className="text-center py-8 text-[11px] text-slate-500 italic font-mono">
+                    STANDBY // NO ENTRIES
                   </div>
                 )}
               </div>
-            </div>
+            </TiltCard>
           );
         })}
       </div>

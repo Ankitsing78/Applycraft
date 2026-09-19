@@ -11,16 +11,14 @@ import {
   ExternalLink,
   ShieldCheck,
   Send,
-  Edit3,
   FileText,
-  Clock,
-  Briefcase,
   ChevronRight,
   Sparkles,
   ArrowRight,
-  Check
+  Radio
 } from "lucide-react";
 import { ApplicationReviewData, FormField } from "@/types";
+import { TiltCard } from "@/components/TiltCard";
 
 function ReviewContent() {
   const router = useRouter();
@@ -103,27 +101,27 @@ function ReviewContent() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400"></div>
       </div>
     );
   }
 
   if (!review) {
     return (
-      <div className="glass-card rounded-2xl p-8 border border-slate-800 text-center space-y-4">
+      <TiltCard glowColor="amber" className="p-8 text-center space-y-4">
         <AlertTriangle className="w-8 h-8 text-amber-400 mx-auto" />
-        <h2 className="text-lg font-bold text-white">No Application Ready for Review</h2>
-        <p className="text-xs text-slate-400">
-          Analyze a job description first to trigger the AI resume tailor and form mapping agent.
+        <h2 className="text-lg font-bold text-white font-mono">NO APPLICATION PENDING REVIEW</h2>
+        <p className="text-xs text-slate-400 font-mono">
+          Scan a target job description first to trigger the AI resume tailor and form mapping agent.
         </p>
         <Link
           href="/apply"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-semibold"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 text-xs font-mono font-bold"
         >
-          <span>Go to Tailor & Apply</span>
+          <span>GO TO TAILOR & APPLY</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
-      </div>
+      </TiltCard>
     );
   }
 
@@ -132,7 +130,6 @@ function ReviewContent() {
   const experienceFields = fields.filter((f) => f.category === "experience" || f.category === "education");
   const screeningFields = fields.filter((f) => f.category === "screening");
   const legalFields = fields.filter((f) => f.category === "legal");
-  const documentFields = fields.filter((f) => f.category === "document");
 
   const allChecklistSatisfied =
     checklist.contactVerified && checklist.noticeVerified && checklist.resumeApproved;
@@ -140,32 +137,32 @@ function ReviewContent() {
   return (
     <div className="space-y-8">
       {/* Top Review Banner */}
-      <div className="pb-4 border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="pb-4 border-b border-cyan-500/20 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-2">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Human-in-the-Loop Checkpoint</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-semibold mb-2 shadow-[0_0_12px_rgba(0,255,136,0.2)]">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span>HUMAN VERIFICATION GATEWAY ACTIVE</span>
           </div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">
-            Pre-Application Form Review: {review.jobTitle}
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-mono">
+            PRE-APPLY REVIEW: {review.jobTitle.toUpperCase()}
           </h1>
-          <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400 mt-1">
-            <span className="text-slate-200 font-semibold flex items-center gap-1">
-              <Building className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400 mt-1 font-mono">
+            <span className="text-cyan-300 font-semibold flex items-center gap-1">
+              <Building className="w-3.5 h-3.5 text-cyan-400" />
               {review.company}
             </span>
             <span>•</span>
-            <span className="capitalize px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-medium">
-              Portal: {review.portal}
+            <span className="capitalize px-2 py-0.5 rounded bg-cyan-950/40 text-cyan-300 font-medium border border-cyan-500/20">
+              PORTAL: {review.portal}
             </span>
             <span>•</span>
             <a
               href={review.portalJobUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1"
+              className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
             >
-              <span>View Portal Form</span>
+              <span>Target Form Link</span>
               <ExternalLink className="w-3 h-3" />
             </a>
           </div>
@@ -176,91 +173,87 @@ function ReviewContent() {
             <button
               onClick={handleConfirmSubmit}
               disabled={submitting || !allChecklistSatisfied}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white text-sm font-semibold shadow-lg shadow-emerald-600/30 transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 disabled:opacity-50 text-slate-950 text-xs sm:text-sm font-mono font-bold shadow-[0_0_25px_rgba(0,255,136,0.35)] transition-all hover:scale-[1.02]"
             >
               <Send className={`w-4 h-4 ${submitting ? "animate-pulse" : ""}`} />
-              <span>{submitting ? "Submitting Application..." : "Confirm & Submit Application"}</span>
+              <span>{submitting ? "DISPATCHING APPLICATION..." : "CONFIRM & DISPATCH VIA AGENT"}</span>
             </button>
           </div>
         )}
       </div>
 
-      {/* Success Notification Modal / Card if submitted */}
+      {/* Success Notification Modal if submitted */}
       {submittedSuccess && confirmationData && (
-        <div className="rounded-2xl bg-gradient-to-r from-emerald-950/70 via-slate-900 to-emerald-950/70 border border-emerald-500/40 p-6 space-y-4 animate-in fade-in zoom-in-95">
+        <TiltCard glowColor="neon" className="p-6 space-y-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-[0_0_15px_rgba(0,255,136,0.3)]">
               <CheckCircle2 className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">Application Successfully Submitted!</h3>
-              <p className="text-xs text-slate-300">
-                The web agent filled and submitted all verified fields to {review.company}.
+              <h3 className="text-lg font-bold text-white font-mono">APPLICATION CONFIRMED & DISPATCHED</h3>
+              <p className="text-xs text-slate-300 font-mono">
+                The web agent executed form submission with verified candidate evidence to {review.company}.
               </p>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div className="p-4 rounded-xl bg-[#030712] border border-cyan-500/20 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
             <div>
-              <span className="text-slate-400">Confirmation ID:</span>
-              <div className="font-mono font-bold text-emerald-400 text-sm">
-                {confirmationData.confirmationId}
-              </div>
+              <span className="text-slate-400">Confirmation Reference:</span>
+              <div className="font-bold text-emerald-400 text-sm">{confirmationData.confirmationId}</div>
             </div>
             <div>
               <span className="text-slate-400">Timestamp:</span>
-              <div className="text-slate-200 font-medium">
-                {new Date(confirmationData.timestamp).toLocaleString()}
-              </div>
+              <div className="text-slate-200">{new Date(confirmationData.timestamp).toLocaleString()}</div>
             </div>
             <div>
-              <span className="text-slate-400">Attached Resume:</span>
-              <div className="text-indigo-300 font-medium truncate">{review.tailoredResumeName}</div>
+              <span className="text-slate-400">Attached Artifact:</span>
+              <div className="text-cyan-300 truncate">{review.tailoredResumeName}</div>
             </div>
           </div>
 
           <div className="flex justify-end gap-3 pt-2">
             <Link
               href="/tracker"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-mono font-bold transition-all shadow-[0_0_15px_rgba(0,240,255,0.3)]"
             >
-              <span>View in Job Tracker Board</span>
+              <span>VIEW IN PIPELINE TRACKER</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </Link>
           </div>
-        </div>
+        </TiltCard>
       )}
 
-      {/* Agent Instructions & Safety Callout */}
-      <div className="glass-card rounded-xl p-4 border border-slate-800 flex items-start gap-3">
-        <AlertTriangle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
-        <p className="text-xs text-slate-300 leading-relaxed">
-          <span className="font-semibold text-white">Human Verification in Progress:</span> All 18 fields
-          below have been pre-filled by the ApplyCraft Web Agent using your Master Profile and the tailored
-          resume. You can click any input to modify values before clicking &quot;Confirm &amp; Submit&quot;.
+      {/* Safety Callout */}
+      <TiltCard glowColor="cyan" className="p-4 flex items-start gap-3">
+        <Radio className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0 animate-pulse" />
+        <p className="text-xs text-slate-300 leading-relaxed font-mono">
+          <span className="font-semibold text-cyan-300">HUMAN VERIFICATION IN PROGRESS:</span> All 18 fields
+          below have been mapped by ApplyCraft Web Agent from your Master Profile and the tailored
+          artifacts. Click any input to edit values before granting final dispatch authorization.
         </p>
-      </div>
+      </TiltCard>
 
-      {/* Two Column Layout: Form Fields on Left, Attached Resume & Checklist on Right */}
+      {/* Form Fields & Checklist Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column: Form Fields */}
         <div className="lg:col-span-2 space-y-6">
           {/* Section 1: Personal Information */}
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-              <span className="w-2 h-2 rounded-full bg-indigo-500" />
-              1. Candidate Contact Information
+          <TiltCard glowColor="cyan" className="p-6 space-y-4">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-cyan-500/20 pb-2 font-mono">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#00f0ff]" />
+              01 // CANDIDATE CONTACT TELEMETRY
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono">
               {personalFields.map((field) => (
                 <div key={field.id} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
                     <label className="font-semibold text-slate-300">
                       {field.label} {field.required && <span className="text-rose-400">*</span>}
                     </label>
-                    <span className="text-[10px] text-emerald-400 font-medium">
-                      {field.isUserEdited ? "Edited by you" : `${field.confidence}% Mapped`}
+                    <span className="text-[10px] text-cyan-400 font-semibold">
+                      {field.isUserEdited ? "USER EDITED" : `${field.confidence}% MAPPED`}
                     </span>
                   </div>
                   <input
@@ -268,29 +261,29 @@ function ReviewContent() {
                     value={field.value}
                     onChange={(e) => handleFieldChange(field.id, e.target.value)}
                     disabled={submittedSuccess}
-                    className="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none disabled:opacity-60"
+                    className="w-full bg-[#030712] border border-cyan-500/30 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-100 focus:ring-2 focus:ring-cyan-400 focus:outline-none disabled:opacity-60 shadow-[inset_0_0_10px_rgba(0,240,255,0.05)]"
                   />
                 </div>
               ))}
             </div>
-          </div>
+          </TiltCard>
 
           {/* Section 2: Experience & Education */}
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-              <span className="w-2 h-2 rounded-full bg-indigo-500" />
-              2. Experience & Credentials
+          <TiltCard glowColor="cyan" className="p-6 space-y-4">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-cyan-500/20 pb-2 font-mono">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#00f0ff]" />
+              02 // CREDENTIALS & EXPERIENCE
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono">
               {experienceFields.map((field) => (
                 <div key={field.id} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
                     <label className="font-semibold text-slate-300">
                       {field.label} {field.required && <span className="text-rose-400">*</span>}
                     </label>
-                    <span className="text-[10px] text-emerald-400 font-medium">
-                      {field.isUserEdited ? "Edited by you" : `${field.confidence}% Mapped`}
+                    <span className="text-[10px] text-cyan-400 font-semibold">
+                      {field.isUserEdited ? "USER EDITED" : `${field.confidence}% MAPPED`}
                     </span>
                   </div>
                   {field.type === "select" && field.options ? (
@@ -298,10 +291,10 @@ function ReviewContent() {
                       value={field.value}
                       onChange={(e) => handleFieldChange(field.id, e.target.value)}
                       disabled={submittedSuccess}
-                      className="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-100 disabled:opacity-60"
+                      className="w-full bg-[#030712] border border-cyan-500/30 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-100 disabled:opacity-60"
                     >
                       {field.options.map((opt, i) => (
-                        <option key={i} value={opt}>
+                        <option key={i} value={opt} className="bg-[#030712]">
                           {opt}
                         </option>
                       ))}
@@ -312,30 +305,30 @@ function ReviewContent() {
                       value={field.value}
                       onChange={(e) => handleFieldChange(field.id, e.target.value)}
                       disabled={submittedSuccess}
-                      className="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none disabled:opacity-60"
+                      className="w-full bg-[#030712] border border-cyan-500/30 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-100 focus:ring-2 focus:ring-cyan-400 focus:outline-none disabled:opacity-60"
                     />
                   )}
                 </div>
               ))}
             </div>
-          </div>
+          </TiltCard>
 
           {/* Section 3: Availability & Compensation */}
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-              <span className="w-2 h-2 rounded-full bg-amber-500" />
-              3. Availability & Compensation (Crucial Check)
+          <TiltCard glowColor="amber" className="p-6 space-y-4">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-cyan-500/20 pb-2 font-mono">
+              <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_6px_#fbbf24]" />
+              03 // AVAILABILITY & COMPENSATION (CRITICAL CHECK)
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono">
               {screeningFields
                 .filter((f) => f.name.includes("salary") || f.name.includes("notice"))
                 .map((field) => (
                   <div key={field.id} className="space-y-1">
                     <div className="flex items-center justify-between text-xs">
                       <label className="font-semibold text-slate-300">{field.label}</label>
-                      <span className="text-[10px] text-emerald-400 font-medium">
-                        {field.isUserEdited ? "Edited by you" : `${field.confidence}% Mapped`}
+                      <span className="text-[10px] text-amber-400 font-semibold">
+                        {field.isUserEdited ? "USER EDITED" : `${field.confidence}% MAPPED`}
                       </span>
                     </div>
                     {field.type === "select" && field.options ? (
@@ -343,10 +336,10 @@ function ReviewContent() {
                         value={field.value}
                         onChange={(e) => handleFieldChange(field.id, e.target.value)}
                         disabled={submittedSuccess}
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-100 disabled:opacity-60"
+                        className="w-full bg-[#030712] border border-cyan-500/30 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-100 disabled:opacity-60"
                       >
                         {field.options.map((opt, i) => (
-                          <option key={i} value={opt}>
+                          <option key={i} value={opt} className="bg-[#030712]">
                             {opt}
                           </option>
                         ))}
@@ -357,22 +350,22 @@ function ReviewContent() {
                         value={field.value}
                         onChange={(e) => handleFieldChange(field.id, e.target.value)}
                         disabled={submittedSuccess}
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-100 disabled:opacity-60"
+                        className="w-full bg-[#030712] border border-cyan-500/30 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-100 disabled:opacity-60"
                       />
                     )}
                   </div>
                 ))}
             </div>
-          </div>
+          </TiltCard>
 
           {/* Section 4: Work Authorization & Legal */}
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-              <span className="w-2 h-2 rounded-full bg-indigo-500" />
-              4. Legal & Work Authorization
+          <TiltCard glowColor="cyan" className="p-6 space-y-4">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-cyan-500/20 pb-2 font-mono">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#00f0ff]" />
+              04 // LEGAL & WORK AUTHORIZATION
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono">
               {legalFields.map((field) => (
                 <div key={field.id} className="space-y-1.5">
                   <label className="block text-xs font-semibold text-slate-300">{field.label}</label>
@@ -389,7 +382,7 @@ function ReviewContent() {
                           checked={field.value === opt}
                           onChange={(e) => handleFieldChange(field.id, e.target.value)}
                           disabled={submittedSuccess}
-                          className="text-indigo-600 focus:ring-indigo-500"
+                          className="text-cyan-500 focus:ring-cyan-400"
                         />
                         <span>{opt}</span>
                       </label>
@@ -398,24 +391,24 @@ function ReviewContent() {
                 </div>
               ))}
             </div>
-          </div>
+          </TiltCard>
 
           {/* Section 5: Screening Questions */}
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
-              <span className="w-2 h-2 rounded-full bg-purple-500" />
-              5. Employer Screening Question Answers
+          <TiltCard glowColor="purple" className="p-6 space-y-4">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-cyan-500/20 pb-2 font-mono">
+              <span className="w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_6px_#a855f7]" />
+              05 // SCREENING QUESTION INTELLIGENCE
             </h3>
 
-            <div className="space-y-4">
+            <div className="space-y-4 font-mono">
               {screeningFields
                 .filter((f) => !f.name.includes("salary") && !f.name.includes("notice"))
                 .map((field) => (
                   <div key={field.id} className="space-y-1.5">
                     <div className="flex items-center justify-between text-xs">
                       <label className="font-semibold text-slate-300">{field.label}</label>
-                      <span className="text-[10px] text-indigo-400 font-medium flex items-center gap-1">
-                        <Sparkles className="w-3 h-3" /> AI Tailored
+                      <span className="text-[10px] text-cyan-300 font-semibold flex items-center gap-1">
+                        <Sparkles className="w-3 h-3 text-cyan-400" /> AI TAILORED
                       </span>
                     </div>
                     <textarea
@@ -423,57 +416,56 @@ function ReviewContent() {
                       value={field.value}
                       onChange={(e) => handleFieldChange(field.id, e.target.value)}
                       disabled={submittedSuccess}
-                      className="w-full bg-slate-900 border border-slate-700/80 rounded-lg p-3 text-xs sm:text-sm text-slate-100 disabled:opacity-60"
+                      className="w-full bg-[#030712] border border-cyan-500/30 rounded-lg p-3 text-xs sm:text-sm text-slate-100 disabled:opacity-60 font-mono shadow-[inset_0_0_10px_rgba(0,240,255,0.05)]"
                     />
                   </div>
                 ))}
             </div>
-          </div>
+          </TiltCard>
         </div>
 
-        {/* Right Column: Attached Documents & Final Submission Checklist */}
+        {/* Right Column: Attached Documents & Checklist */}
         <div className="space-y-6">
-          {/* Attached Tailored Resume Card */}
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              <FileText className="w-4 h-4 text-indigo-400" />
-              Attached Tailored Resume
+          <TiltCard glowColor="cyan" className="p-6 space-y-4">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2 font-mono">
+              <FileText className="w-4 h-4 text-cyan-400" />
+              ATTACHED ARTIFACT
             </h3>
 
-            <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-700/80 space-y-2">
+            <div className="p-3.5 rounded-xl bg-[#030712] border border-cyan-500/30 space-y-2 font-mono">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-slate-200 truncate">
                   {review.tailoredResumeName}
                 </span>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-medium border border-emerald-500/20">
-                  Ready
+                <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">
+                  COMPILED
                 </span>
               </div>
               <p className="text-[11px] text-slate-400">
-                Optimized with ATS keywords matching {review.company}&apos;s job description.
+                Resonant keywords aligned with {review.company}&apos;s job specification.
               </p>
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-slate-300">Custom Cover Letter</label>
+              <label className="block text-xs font-semibold text-slate-300 font-mono">CUSTOM COVER LETTER</label>
               <textarea
                 rows={6}
                 value={review.coverLetter}
                 readOnly
-                className="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg p-3 text-[11px] text-slate-300 font-mono"
+                className="w-full bg-[#030712] border border-cyan-500/20 rounded-lg p-3 text-[11px] text-cyan-200 font-mono"
               />
             </div>
-          </div>
+          </TiltCard>
 
-          {/* Mandatory Human Confirmation Checklist */}
+          {/* Verification Checklist */}
           {!submittedSuccess && (
-            <div className="glass-card rounded-2xl p-6 border border-indigo-500/30 space-y-4 bg-indigo-950/20">
-              <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <TiltCard glowColor="neon" className="p-6 space-y-4">
+              <h3 className="text-sm font-bold text-white flex items-center gap-2 font-mono">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                Human Review Checklist
+                VERIFICATION PROTOCOL
               </h3>
 
-              <div className="space-y-3 text-xs">
+              <div className="space-y-3 text-xs font-mono">
                 <label className="flex items-start gap-2.5 text-slate-300 cursor-pointer">
                   <input
                     type="checkbox"
@@ -481,9 +473,9 @@ function ReviewContent() {
                     onChange={(e) =>
                       setChecklist({ ...checklist, contactVerified: e.target.checked })
                     }
-                    className="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500"
+                    className="mt-0.5 rounded text-cyan-500 focus:ring-cyan-400"
                   />
-                  <span>I have inspected my contact details, phone, and current employer.</span>
+                  <span>I have verified contact details, mobile, and employer.</span>
                 </label>
 
                 <label className="flex items-start gap-2.5 text-slate-300 cursor-pointer">
@@ -493,9 +485,9 @@ function ReviewContent() {
                     onChange={(e) =>
                       setChecklist({ ...checklist, noticeVerified: e.target.checked })
                     }
-                    className="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500"
+                    className="mt-0.5 rounded text-cyan-500 focus:ring-cyan-400"
                   />
-                  <span>I verify my notice period and expected compensation are accurate.</span>
+                  <span>I verify notice period and compensation targets.</span>
                 </label>
 
                 <label className="flex items-start gap-2.5 text-slate-300 cursor-pointer">
@@ -505,9 +497,9 @@ function ReviewContent() {
                     onChange={(e) =>
                       setChecklist({ ...checklist, resumeApproved: e.target.checked })
                     }
-                    className="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500"
+                    className="mt-0.5 rounded text-cyan-500 focus:ring-cyan-400"
                   />
-                  <span>I approve sending the tailored ATS resume and cover letter.</span>
+                  <span>I approve sending the tailored ATS resume.</span>
                 </label>
               </div>
 
@@ -515,20 +507,20 @@ function ReviewContent() {
                 type="button"
                 onClick={handleConfirmSubmit}
                 disabled={submitting || !allChecklistSatisfied}
-                className="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-bold shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 text-xs sm:text-sm font-mono font-bold shadow-[0_0_25px_rgba(0,255,136,0.35)] transition-all flex items-center justify-center gap-2"
               >
                 <Send className={`w-4 h-4 ${submitting ? "animate-spin" : ""}`} />
                 <span>
                   {submitting
-                    ? "Agent Submitting to Portal..."
-                    : "Confirm & Submit Application"}
+                    ? "DISPATCHING FORM VIA BRIDGE..."
+                    : "CONFIRM & DISPATCH VIA AGENT"}
                 </span>
               </button>
 
-              <p className="text-[11px] text-slate-400 text-center">
-                Submitting executes the final form post via the browser bridge and logs the entry in your tracker.
+              <p className="text-[10px] text-slate-400 text-center font-mono">
+                Submitting triggers authenticated form posting and records verified submission evidence.
               </p>
-            </div>
+            </TiltCard>
           )}
         </div>
       </div>
@@ -541,7 +533,7 @@ export default function ReviewPage() {
     <Suspense
       fallback={
         <div className="flex items-center justify-center min-h-[400px]">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400"></div>
         </div>
       }
     >
