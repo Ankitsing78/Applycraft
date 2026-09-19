@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "ApplyCraft AI - Job Copilot Bridge",
+  "version": "1.0.0",
+  "description": "Companion browser bridge for ApplyCraft AI. Connects your existing LinkedIn, Naukri, Indeed, and ATS sessions without exposing credentials.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*",
+    "https://*.linkedin.com/*",
+    "https://*.naukri.com/*",
+    "https://*.indeed.com/*",
+    "https://*.hirist.tech/*",
+    "https://*.foundit.in/*",
+    "https://*.shine.com/*",
+    "https://*.greenhouse.io/*",
+    "https://*.lever.co/*",
+    "https://*.myworkdayjobs.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ApplyCraft Companion Bridge"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*",
+        "https://*.naukri.com/*",
+        "https://*.indeed.com/*",
+        "https://*.hirist.tech/*",
+        "https://*.foundit.in/*",
+        "https://*.shine.com/*",
+        "https://*.greenhouse.io/*",
+        "https://*.lever.co/*",
+        "https://*.myworkdayjobs.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
