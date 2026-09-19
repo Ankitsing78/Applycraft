@@ -16,6 +16,16 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { action, portalId, updates } = body;
 
+    if (action === "connect") {
+      const updated = Storage.connectPortal(portalId);
+      return NextResponse.json({ success: true, portal: updated });
+    }
+
+    if (action === "disconnect") {
+      const updated = Storage.disconnectPortal(portalId);
+      return NextResponse.json({ success: true, portal: updated });
+    }
+
     if (action === "toggle") {
       const updated = Storage.togglePortal(portalId);
       return NextResponse.json({ success: true, portal: updated });

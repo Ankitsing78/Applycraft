@@ -79,6 +79,13 @@ export type PortalId =
   | "lever"
   | "workday";
 
+export interface PortalCapabilities {
+  jobDetection: boolean;
+  formDetection: boolean;
+  resumeUpload: boolean;
+  questionAutofill: boolean;
+}
+
 export interface PortalConnection {
   id: PortalId;
   name: string;
@@ -86,10 +93,13 @@ export interface PortalConnection {
   logoColor: string;
   url: string;
   status: "connected" | "disconnected" | "syncing" | "session_expired";
+  statusText?: string;
   username?: string;
   profileUrl?: string;
+  lastChecked?: string;
   lastSynced?: string;
   activeSessionDetected: boolean;
+  capabilities: PortalCapabilities;
   supportedFeatures: {
     oneClickApply: boolean;
     tailoredResumeUpload: boolean;

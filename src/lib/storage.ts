@@ -121,6 +121,13 @@ const DEFAULT_PROFILE: CandidateProfile = {
   ]
 };
 
+const DEFAULT_CAPABILITIES = {
+  jobDetection: true,
+  formDetection: true,
+  resumeUpload: true,
+  questionAutofill: true
+};
+
 const DEFAULT_PORTALS: PortalConnection[] = [
   {
     id: "linkedin",
@@ -129,10 +136,13 @@ const DEFAULT_PORTALS: PortalConnection[] = [
     logoColor: "#0A66C2",
     url: "https://www.linkedin.com/jobs",
     status: "connected",
+    statusText: "Browser Session Detected",
     username: "ankit.dev@example.com",
     profileUrl: "https://linkedin.com/in/ankit-dev-profile",
+    lastChecked: "12:32 AM",
     lastSynced: "2026-09-19T22:30:00Z",
     activeSessionDetected: true,
+    capabilities: DEFAULT_CAPABILITIES,
     supportedFeatures: {
       oneClickApply: true,
       tailoredResumeUpload: true,
@@ -147,10 +157,13 @@ const DEFAULT_PORTALS: PortalConnection[] = [
     logoColor: "#0047AB",
     url: "https://www.naukri.com",
     status: "connected",
+    statusText: "Browser Session Detected",
     username: "ankit.dev@example.com",
     profileUrl: "https://my.naukri.com/HomePage/view",
+    lastChecked: "12:30 AM",
     lastSynced: "2026-09-19T21:45:00Z",
     activeSessionDetected: true,
+    capabilities: DEFAULT_CAPABILITIES,
     supportedFeatures: {
       oneClickApply: true,
       tailoredResumeUpload: true,
@@ -165,9 +178,12 @@ const DEFAULT_PORTALS: PortalConnection[] = [
     logoColor: "#2164f3",
     url: "https://www.indeed.com",
     status: "connected",
+    statusText: "Browser Session Detected",
     username: "ankit.dev@example.com",
+    lastChecked: "12:15 AM",
     lastSynced: "2026-09-19T18:10:00Z",
     activeSessionDetected: true,
+    capabilities: DEFAULT_CAPABILITIES,
     supportedFeatures: {
       oneClickApply: true,
       tailoredResumeUpload: true,
@@ -182,9 +198,12 @@ const DEFAULT_PORTALS: PortalConnection[] = [
     logoColor: "#F36F21",
     url: "https://www.hirist.tech",
     status: "connected",
+    statusText: "Browser Session Detected",
     username: "ankit.dev@example.com",
+    lastChecked: "11:55 PM",
     lastSynced: "2026-09-19T19:00:00Z",
     activeSessionDetected: true,
+    capabilities: DEFAULT_CAPABILITIES,
     supportedFeatures: {
       oneClickApply: true,
       tailoredResumeUpload: true,
@@ -199,7 +218,10 @@ const DEFAULT_PORTALS: PortalConnection[] = [
     logoColor: "#6c2eb9",
     url: "https://www.foundit.in",
     status: "disconnected",
+    statusText: "Disconnected",
+    lastChecked: "10:20 PM",
     activeSessionDetected: false,
+    capabilities: DEFAULT_CAPABILITIES,
     supportedFeatures: {
       oneClickApply: true,
       tailoredResumeUpload: true,
@@ -214,7 +236,10 @@ const DEFAULT_PORTALS: PortalConnection[] = [
     logoColor: "#118076",
     url: "https://www.shine.com",
     status: "disconnected",
+    statusText: "Disconnected",
+    lastChecked: "09:40 PM",
     activeSessionDetected: false,
+    capabilities: DEFAULT_CAPABILITIES,
     supportedFeatures: {
       oneClickApply: true,
       tailoredResumeUpload: true,
@@ -229,7 +254,10 @@ const DEFAULT_PORTALS: PortalConnection[] = [
     logoColor: "#2A7B4C",
     url: "https://boards.greenhouse.io",
     status: "connected",
+    statusText: "Browser Session Detected",
+    lastChecked: "12:28 AM",
     activeSessionDetected: true,
+    capabilities: DEFAULT_CAPABILITIES,
     supportedFeatures: {
       oneClickApply: false,
       tailoredResumeUpload: true,
@@ -244,7 +272,10 @@ const DEFAULT_PORTALS: PortalConnection[] = [
     logoColor: "#e26616",
     url: "https://myworkdayjobs.com",
     status: "connected",
+    statusText: "Browser Session Detected",
+    lastChecked: "12:25 AM",
     activeSessionDetected: true,
+    capabilities: DEFAULT_CAPABILITIES,
     supportedFeatures: {
       oneClickApply: false,
       tailoredResumeUpload: true,
@@ -259,7 +290,10 @@ const DEFAULT_PORTALS: PortalConnection[] = [
     logoColor: "#4B4453",
     url: "https://jobs.lever.co",
     status: "connected",
+    statusText: "Browser Session Detected",
+    lastChecked: "12:10 AM",
     activeSessionDetected: true,
+    capabilities: DEFAULT_CAPABILITIES,
     supportedFeatures: {
       oneClickApply: true,
       tailoredResumeUpload: true,
@@ -344,7 +378,16 @@ function readDB(): DatabaseSchema {
 
   try {
     const raw = fs.readFileSync(DB_FILE, "utf-8");
-    return JSON.parse(raw) as DatabaseSchema;
+    const parsed = JSON.parse(raw) as DatabaseSchema;
+    if (parsed && Array.isArray(parsed.portals)) {
+      parsed.portals = parsed.portals.map((p) => ({
+        ...p,
+        statusText: p.statusText || (p.status === "connected" ? "Browser Session Detected" : "Disconnected"),
+        lastChecked: p.lastChecked || "12:32 AM",
+        capabilities: p.capabilities || DEFAULT_CAPABILITIES
+      }));
+    }
+    return parsed;
   } catch (error) {
     console.error("Error reading database file, returning fallback defaults:", error);
     return {
@@ -393,17 +436,57 @@ export const Storage = {
     return db.portals[index];
   },
 
+  connectPortal(id: string): PortalConnection | null {
+    const db = readDB();
+    const index = db.portals.findIndex((p) => p.id === id);
+    if (index === -1) return null;
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit", hour12: true });
+    db.portals[index] = {
+      ...db.portals[index],
+      status: "connected",
+      statusText: "Browser Session Detected",
+      activeSessionDetected: true,
+      lastChecked: timeStr,
+      lastSynced: now.toISOString(),
+      capabilities: db.portals[index].capabilities || DEFAULT_CAPABILITIES
+    };
+    writeDB(db);
+    return db.portals[index];
+  },
+
+  disconnectPortal(id: string): PortalConnection | null {
+    const db = readDB();
+    const index = db.portals.findIndex((p) => p.id === id);
+    if (index === -1) return null;
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit", hour12: true });
+    db.portals[index] = {
+      ...db.portals[index],
+      status: "disconnected",
+      statusText: "Disconnected",
+      activeSessionDetected: false,
+      lastChecked: timeStr
+    };
+    writeDB(db);
+    return db.portals[index];
+  },
+
   togglePortal(id: string): PortalConnection | null {
     const db = readDB();
     const index = db.portals.findIndex((p) => p.id === id);
     if (index === -1) return null;
     const current = db.portals[index];
     const newStatus = current.status === "connected" ? "disconnected" : "connected";
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit", hour12: true });
     db.portals[index] = {
       ...current,
       status: newStatus,
+      statusText: newStatus === "connected" ? "Browser Session Detected" : "Disconnected",
       activeSessionDetected: newStatus === "connected",
-      lastSynced: newStatus === "connected" ? new Date().toISOString() : current.lastSynced
+      lastChecked: timeStr,
+      lastSynced: newStatus === "connected" ? now.toISOString() : current.lastSynced
     };
     writeDB(db);
     return db.portals[index];
